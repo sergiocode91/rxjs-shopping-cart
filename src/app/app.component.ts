@@ -1,13 +1,26 @@
 import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { AsyncPipe, CommonModule } from '@angular/common';
+import { ShoppingCartService, Product } from './service/shopping-cart.service';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet],
+  imports: [CommonModule, AsyncPipe],
   templateUrl: './app.component.html',
-  styleUrl: './app.component.scss'
+  styleUrl: './app.component.scss',
 })
 export class AppComponent {
-  title = 'rxjs-shopping-cart';
+  products$ = this._shoppingCartService.products$;
+  cart$ = this._shoppingCartService.cart$;
+  totalPrice$ = this._shoppingCartService.getTotalPrice();
+
+  constructor(private _shoppingCartService: ShoppingCartService) {}
+
+  addToCart(product: Product) {
+    this._shoppingCartService.addToCart(product);
+  }
+
+  removeFromCart(productId: number) {
+    this._shoppingCartService.removeFromCart(productId);
+  }
 }
