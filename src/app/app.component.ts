@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { AsyncPipe, CommonModule } from '@angular/common';
-import { ShoppingCartService, Product } from './service/shopping-cart.service';
+import { Product, ShoppingCartService } from '@/service/shopping-cart.service';
 
 @Component({
   selector: 'app-root',
